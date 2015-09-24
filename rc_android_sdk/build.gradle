@@ -1,0 +1,165 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    /*
+    This dependency is for the Gson library. For more information visit:
+    https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html
+     */
+    compile 'com.google.code.gson:gson:2.3.1'
+    /*
+    This dependency is for the OkHttp library. For more information visit:
+    http://square.github.io/okhttp/
+     */
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    /*
+    This dependency is for the PubNub library. For more information visit:
+    https://www.pubnub.com/docs/android-java/api-reference
+     */
+    compile 'com.pubnub:pubnub-android:3.7.4'
+}
+
+
+//Uncomment code below for uploading new versions to Bintray and JCenter
+
+//ext {
+//    bintrayRepo = 'maven'
+//    bintrayName = 'rc_android_sdk'
+//
+//    publishedGroupId = 'com.ringcentral.rcandroidsdk'
+//    libraryName = 'RCAndroidSDK'
+//    artifact = 'rc_android_sdk'
+//
+//    libraryDescription = 'An Android SDK for RingCentral platform API\'s'
+//
+//    siteUrl = 'https://github.com/ringcentral/ringcentral-android'
+//    gitUrl = 'https://github.com/ringcentral/ringcentral-android.git'
+//    //Switch these each time for uploading to Bintray
+//    libraryVersion = '0.0.4'
+//
+//    developerId = 'andrewpang'
+//    developerName = 'Andrew Pang'
+//    developerEmail = 'andrewpang94@gmail.com'
+//
+//    licenseName = 'The Apache Software License, Version 2.0'
+//    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//    allLicenses = ["Apache-2.0"]
+//}
+//
+//apply plugin: 'com.github.dcendents.android-maven'
+//
+//group = publishedGroupId                               // Maven Group ID for the artifact
+//
+//install {
+//    repositories.mavenInstaller {
+//        // This generates POM.xml with proper parameters
+//        pom {
+//            project {
+//                packaging 'aar'
+//                groupId publishedGroupId
+//                artifactId artifact
+//
+//                // Add your description here
+//                name libraryName
+//                description libraryDescription
+//                url siteUrl
+//
+//                // Set your license
+//                licenses {
+//                    license {
+//                        name licenseName
+//                        url licenseUrl
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id developerId
+//                        name developerName
+//                        email developerEmail
+//                    }
+//                }
+//                scm {
+//                    connection gitUrl
+//                    developerConnection gitUrl
+//                    url siteUrl
+//
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//apply plugin: 'com.jfrog.bintray'
+//
+//version = libraryVersion
+//
+//task sourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier = 'sources'
+//}
+//
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+//artifacts {
+//    archives javadocJar
+//    archives sourcesJar
+//}
+//
+//// Bintray
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//
+//bintray {
+//    user = properties.getProperty("bintray.user")
+//    key = properties.getProperty("bintray.apikey")
+//
+//    configurations = ['archives']
+//    pkg {
+//        repo = bintrayRepo
+//        userOrg = 'ringcentral'
+//        name = bintrayName
+//        desc = libraryDescription
+//        websiteUrl = siteUrl
+//        vcsUrl = gitUrl
+//        licenses = allLicenses
+//        publish = true
+//        publicDownloadNumbers = true
+//        version {
+//            desc = libraryDescription
+//            gpg {
+//                sign = true //Determines whether to GPG sign the files. The default is false
+//                passphrase = properties.getProperty("bintray.gpg.password")
+//                //Optional. The passphrase for GPG signing'
+//            }
+//        }
+//    }
+//}
