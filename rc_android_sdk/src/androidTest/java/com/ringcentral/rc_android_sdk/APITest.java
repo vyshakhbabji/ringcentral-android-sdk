@@ -21,9 +21,9 @@ import java.util.HashMap;
  */
 public class APITest extends InstrumentationTestCase {
 
-    public void testApi() throws Exception{
+    public void testApi() throws Exception {
         SDK sdk = new SDK("E0_nOAfbR7GkteYbDv93oA", "UelNnk-1QYK0rHyvjJJ9yQx3Yl6vj3RvGmb0G2SH6ePw", Platform.Server.SANDBOX);
-        final Helpers helpers= sdk.getHelpers();
+        final Helpers helpers = sdk.getHelpers();
         helpers.login("15856234138", "", "P@ssw0rd",
                 new Callback() {
                     @Override
@@ -33,14 +33,14 @@ public class APITest extends InstrumentationTestCase {
 
                     @Override
                     public void onResponse(Response response) throws IOException {
-                        APIResponse transaction = new APIResponse(response);
+                        APIResponse transaction = new APIResponse(response.request(), response);
                         HashMap<String, String> responseMap = transaction.hashMap();
                         helpers.setAuthData(responseMap);
                         //Test Authorization
                         assertTrue(transaction.ok());
 
                         //Test Send SMS
-                        helpers.sendSMS("16502823614", "15856234166", "Test Message",
+                        helpers.sendSMS("16197619503", "15856234138", "Test Message",
                                 new Callback() {
                                     @Override
                                     public void onFailure(Request request, IOException e) {
@@ -48,7 +48,7 @@ public class APITest extends InstrumentationTestCase {
 
                                     @Override
                                     public void onResponse(Response response) throws IOException {
-                                        APIResponse transaction = new APIResponse(response);
+                                        APIResponse transaction = new APIResponse(response.request(), response);
                                         assertTrue(transaction.ok());
                                         try {
                                             JSONObject json = new JSONObject(transaction.toString());
@@ -66,7 +66,7 @@ public class APITest extends InstrumentationTestCase {
 
                                                         @Override
                                                         public void onResponse(Response response) throws IOException {
-                                                            APIResponse deleteResponse = new APIResponse(response);
+                                                            APIResponse deleteResponse = new APIResponse(response.request(), response);
                                                             assertTrue(deleteResponse.ok());
                                                         }
                                                     });
@@ -86,7 +86,7 @@ public class APITest extends InstrumentationTestCase {
 
                                     @Override
                                     public void onResponse(Response response) throws IOException {
-                                        APIResponse callLogResponse = new APIResponse(response);
+                                        APIResponse callLogResponse = new APIResponse(response.request(), response);
                                         assertTrue(callLogResponse.ok());
                                     }
                                 }
@@ -101,7 +101,7 @@ public class APITest extends InstrumentationTestCase {
 
                                     @Override
                                     public void onResponse(Response response) throws IOException {
-                                        APIResponse callLogResponse = new APIResponse(response);
+                                        APIResponse callLogResponse = new APIResponse(response.request(), response);
                                         assertTrue(callLogResponse.ok());
                                     }
                                 }
@@ -116,7 +116,7 @@ public class APITest extends InstrumentationTestCase {
 
                                     @Override
                                     public void onResponse(Response response) throws IOException {
-                                        APIResponse messageStoreResponse = new APIResponse(response);
+                                        APIResponse messageStoreResponse = new APIResponse(response.request(), response);
                                         assertTrue(messageStoreResponse.ok());
                                     }
                                 }
@@ -125,9 +125,9 @@ public class APITest extends InstrumentationTestCase {
                     }
                 }
         );
-        try{
+        try {
             Thread.sleep(1000);
-        } catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
